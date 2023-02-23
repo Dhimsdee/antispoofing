@@ -8,3 +8,5 @@ split two terminals, first using virtual environment run:
 
 on the second terminal, change the directory to client by: <pre><code>cd client </code></pre>
 then run: <pre><code>yarn start </code></pre>
+
+then you can run the localhost from the frontend side
