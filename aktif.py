@@ -1,19 +1,17 @@
-# default parameter
-
 import random 
 import cv2
 import imutils
 import f_liveness_detection
 import questions
+import requests
+import json
 
 def capture_frame():
-    # instanciar camara
     cv2.namedWindow('liveness_detection')
     cam = cv2.VideoCapture(0)
     return cam
 
-def activenessnet(cam):
-    # parameters 
+def activenessnet(cam): 
     COUNTER, TOTAL = 0,0
     counter_ok_questions = 0 # Inisasi variabel untuk jumlah perintah yang berhasil dijalankan
     counter_ok_consecutives = 0
@@ -26,12 +24,13 @@ def activenessnet(cam):
     def show_image(cam,text,color = (0,0,255)):
         ret, im = cam.read()
         im = imutils.resize(im, width=720)
-        #im = cv2.flip(im, 1)
         cv2.putText(im,text,(10,50),cv2.FONT_HERSHEY_COMPLEX,1,color,2)
         return im
 
     num = list(range(0,limit_questions))
     random.shuffle(num)
+    
+    liveness = {}
 
     for i_questions in num:
         question = questions.question_bank(i_questions)
@@ -43,11 +42,9 @@ def activenessnet(cam):
             break 
 
         for i_try in range(limit_try):
-            # <----------------------- ingestar data 
             ret, im = cam.read()
             im = imutils.resize(im, width=720)
             im = cv2.flip(im, 1)
-            # <----------------------- ingestar data 
             TOTAL_0 = TOTAL
             out_model = f_liveness_detection.detect_liveness(im,COUNTER,TOTAL_0)
             TOTAL = out_model['total_blinks']
@@ -86,24 +83,29 @@ def activenessnet(cam):
             elif i_try == limit_try-1:
                 break
                 
-
         if counter_ok_questions ==  limit_questions:
             while True:
                 im = show_image(cam,"Anda dinyatakan real",color = (0,255,0))
                 cv2.imshow('liveness_detection',im)
-                if cv2.waitKey(1) &0xFF == ord('q'):
+                if cv2.waitKey(1) == ord('q'):
+                    cv2.destroyAllWindows()
                     break
+            liveness['label'] = "Real"
+            
         elif i_try == limit_try-1:
             while True:
                 im = show_image(cam,"Silakan coba lagi")
                 cv2.imshow('liveness_detection',im)
-                if cv2.waitKey(1) &0xFF == ord('q'):
+                if cv2.waitKey(1) == ord('q'):
+                    cv2.destroyAllWindows()
                     break
+            liveness['label'] = "Fake"
             break 
 
         else:
             continue
-    
+    cv2.destroyAllWindows()
+
     liveness = True
 
-    return cam
+    return json.dumps(liveness)

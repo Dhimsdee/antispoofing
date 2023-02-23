@@ -2,7 +2,7 @@
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from livenessnet.pasif import livenessnet
-from activenessnet.aktif import capture_frame, activenessnet
+import aktif
 import cv2
 
 app = Flask(__name__)
@@ -41,12 +41,13 @@ def liveness_detection():
 def activenessnet():
     def generate():
         while True:
-            frame = capture_frame()
-            liveness = activenessnet(frame)
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+            frame = aktif.capture_frame()
+            liveness = aktif.activenessnet(frame)
+            label = 'Real' if liveness else 'Fake'
+            yield (b'data: label: ' + label.encode('utf-8') + b'\n\n')
+            yield (b'data: ' + frame + b'\n\n')
     return Response(generate(),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+                    mimetype='text/event-stream')
 
 if __name__ == '__main__':
     app.run(debug=True)
