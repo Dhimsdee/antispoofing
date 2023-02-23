@@ -1,0 +1,14 @@
+python generate_frames.py --input video/Maya_Real.mp4 --output manual-dataset/real --detector face_detector --skip 3
+
+python generate_frames.py --input video/Maya_Fake.mp4 --output manual-dataset/fake --detector face_detector --skip 5
+
+python trainmodel.py --dataset dataset --model LivenessNet-1.model --le le.pickle
+
+python test.py --model LivenessNet.model --le le.pickle --detector face_detector
+
+python main.py --model LivenessNet.model --le le.pickle --detector face_detector
+
+ResNet SSD
+res10_300x300_ssd_iter_140000.caffemodel
+
+env: liveness

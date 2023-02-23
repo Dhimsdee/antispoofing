@@ -1,0 +1,15 @@
+@font-face{
+  font-family: Lexend;
+  src: url('./fonts/Lexend.ttf');
+}
+  *{
+    font-family: 'Lexend';
+    font-weight: normal;
+    font-size: 24px;
+    color: var(--black);
+  }
+  body{
+    margin: 0;
+  }
+
+  

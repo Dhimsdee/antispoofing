@@ -1,0 +1,15 @@
+imutils
+opencv-contrib-python
+opencv-python
+Keras
+Keras-Applications
+Keras-Preprocessing
+matplotlib
+tensorflow
+numpy
+matplotlib
+scikit_learn
+pickle-mixin
+pickleshare
+sklearn
+sklearn-deap2

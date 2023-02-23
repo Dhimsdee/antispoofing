@@ -1,0 +1,4 @@
+env: active-1
+
+run:
+python active_detection.py

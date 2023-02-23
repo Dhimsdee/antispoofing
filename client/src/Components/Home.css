@@ -1,0 +1,87 @@
+.Header{
+    font-size: 64px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 49px;
+  }
+  
+  .Header2{
+    font-size: 64px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .subtitle-text{
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    padding-top:40px;
+    
+  }
+  
+  .purple-text{
+    color: var(--purple);
+    font-weight: 700;
+  }
+  
+  .btn {
+    display: inline-block;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px 80px;
+    gap: 12px;
+  
+    position: static;
+    width: 201px;
+    height: 48px;
+    left: 662px;
+    top: 410px;
+    background: var(--blue);
+    border-radius: 8px;
+    border-color: transparent;
+    font-family: 'Lexend';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #ffffff;
+    transition: 300ms all;
+  
+  }
+  
+  .btn:hover{
+    cursor: pointer;
+  }
+  
+  .button_primary{
+    display: flex;
+    padding-top: 20px;
+    gap: 36px;
+    justify-content: center;
+  }
+  
+  .text{
+    padding-top: 20px;
+    font-size:11px;
+    font-weight: 400;
+    text-align: center;
+    color:var(--grey)
+  }
+  
+  .Heroimage{
+    z-index: -1;
+    background-image: url('../img/Pattern-bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    width: 1115px;
+    height: 545px;
+    bottom: 40px; 
+    left: 163px;
+  }
+  
+  .img_question{
+    padding-right: 4px;
+    align-items: center;
+  }
